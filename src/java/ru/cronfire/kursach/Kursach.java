@@ -184,9 +184,8 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void showEmployeeInfo() {
-        if(currentEmployee == null) {
+        if(!isEmployeeSelected()) {
             employeeInfo.setText(employeeInfoTemplate);
-            Util.showEmployeeMessage(ERR_MSG + "Не выбран сотрудник.");
             return;
         }
         Employee e = currentEmployee;
@@ -212,10 +211,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void toggleRecordHoursDialog() {
-        if(currentEmployee == null) {
-            Util.showEmployeeMessage(ERR_MSG + "Не выбран сотрудник.");
-            return;
-        }
+        if(!isEmployeeSelected()) return;
         updateRecordHoursDialog();
         employeeActionPane.getChildren().forEach((node) -> node.setVisible(false));
         recordHoursPane.setVisible(true);
@@ -234,10 +230,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void toggleEditEmployeeDialog() {
-        if(currentEmployee == null) {
-            Util.showEmployeeMessage(ERR_MSG + "Не выбран сотрудник.");
-            return;
-        }
+        if(!isEmployeeSelected()) return;
         updateEditEmployeeDialog();
         employeeActionPane.getChildren().forEach((node) -> node.setVisible(false));
         editEmployeePane.setVisible(true);
@@ -322,10 +315,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void toggleDeleteEmployeeDialog() {
-        if(currentEmployee == null) {
-            Util.showEmployeeMessage(ERR_MSG + "Не выбран сотрудник.");
-            return;
-        }
+        if(!isEmployeeSelected()) return;
         employeeActionPane.getChildren().forEach((node) -> node.setVisible(false));
         deleteEmployeePane.setVisible(true);
     }
@@ -356,10 +346,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void showDepartmentInfo() {
-        if(currentDepartment == null) {
-            Util.showDepartmentMessage(ERR_MSG + "Не выбран отдел.");
-            return;
-        }
+        if(!isDepartmentSelected()) return;
         Department d = currentDepartment;
 
         departmentInfo.setText(departmentInfoTemplate
@@ -379,10 +366,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void toggleEditDepartmentDialog() {
-        if(currentDepartment == null) {
-            Util.showDepartmentMessage(ERR_MSG + "Не выбран отдел.");
-            return;
-        }
+        if(!isDepartmentSelected()) return;
         updateEditDepartmentDialog();
         departmentActionPane.getChildren().forEach((node) -> node.setVisible(false));
         editDepartmentPane.setVisible(true);
@@ -444,10 +428,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void toggleDeleteDepartmentDialog() {
-        if(currentDepartment == null) {
-            Util.showDepartmentMessage(ERR_MSG + "Не выбран отдел.");
-            return;
-        }
+        if(!isDepartmentSelected()) return;
         departmentActionPane.getChildren().forEach((node) -> node.setVisible(false));
         deleteDepartmentPane.setVisible(true);
     }
@@ -462,18 +443,23 @@ public class Kursach implements Initializable {
 
     // Other stuff
     private boolean isEmployeeSelected() {
-        return currentEmployee != null;
+        if(currentEmployee == null) {
+            Util.showEmployeeMessage(ERR_MSG + "Не выбран сотрудник.");
+            return false;
+        }
+        return true;
     }
 
     private boolean isDepartmentSelected() {
-        return currentDepartment != null;
+        if(currentDepartment == null) {
+            Util.showDepartmentMessage(ERR_MSG + "Не выбран отдел.");
+            return false;
+        }
+        return true;
     }
 
     private void updateRecordHoursDialog() {
-        if(currentEmployee == null) {
-            Util.showEmployeeMessage(ERR_MSG + "Не выбран сотрудник.");
-            return;
-        }
+        if(!isEmployeeSelected()) return;
         recordId.setText(String.valueOf(currentEmployee.getId()));
         if(db.getLastRecordedDate(currentEmployee) == null) {
             lastDate.setText("—");
