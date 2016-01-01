@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" styleClass="mainPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.cronfire.kursach.Kursach">
+   <children>
+      <TabPane prefHeight="425.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Сотрудники">
+               <content>
+                  <Pane>
+                     <children>
+                        <ToolBar prefHeight="35.0" prefWidth="600.0">
+                          <items>
+                            <Button mnemonicParsing="false" onAction="#showEmployeeInfo" text="Информация о сотруднике" />
+                              <Button mnemonicParsing="false" onAction="#toggleRecordHoursDialog" text="Табель" />
+                              <Button mnemonicParsing="false" onAction="#toggleEditEmployeeDialog" text="Редактировать" />
+                              <Button mnemonicParsing="false" onAction="#toggleAddEmployeeDialog" text="Добавить" />
+                              <Button mnemonicParsing="false" onAction="#toggleDeleteEmployeeDialog" text="Удалить" />
+                          </items>
+                        </ToolBar>
+                        <ListView fx:id="employeeList" layoutX="15.0" layoutY="45.0" prefHeight="280.0" prefWidth="250.0" />
+                        <Pane fx:id="employeeActionPane" layoutX="336.0" layoutY="45.0" prefHeight="280.0" prefWidth="250.0" styleClass="actionPane">
+                           <children>
+                              <Pane fx:id="employeeInfoPane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <Label fx:id="employeeInfo" alignment="TOP_LEFT" prefHeight="280.0" prefWidth="250.0" style="-fx-padding: 5;" text="Номер сотрудника: #${id}&#10;Отдел: ${department}&#10;Фамилия: ${surname}&#10;Имя: ${name}&#10;Отчество: ${patronymic}&#10;Дата рождения: ${birth}&#10;Номер телефона: ${phone}&#10;&#10;Статистика:&#10;За неделю: ${stats1} ч.&#10;За месяц: ${stats2} ч.&#10;За год: ${stats3} ч.&#10;Всего: ${stats4} ч." wrapText="true" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="recordHoursPane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <TextField fx:id="recordId" disable="true" editable="false" layoutX="5.0" layoutY="5.0" prefHeight="25.0" prefWidth="100.0" promptText="Id сотрудника">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="114.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id сотрудника">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <DatePicker fx:id="recordDate" layoutX="5.0" layoutY="35.0" prefHeight="25.0" prefWidth="100.0" promptText="Дата" showWeekNumbers="true" />
+                                    <TextField fx:id="recordHours" layoutX="5.0" layoutY="66.0" prefHeight="25.0" prefWidth="35.0" promptText="8">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label alignment="BASELINE_CENTER" layoutX="43.0" layoutY="69.0" prefHeight="17.0" prefWidth="107.0" text="часов учтено" textAlignment="JUSTIFY" />
+                                    <Button layoutX="86.0" layoutY="191.0" mnemonicParsing="false" onAction="#recordHours" text="Применить">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Text layoutX="5.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Последняя учтенная дата:">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="lastDate" disable="true" editable="false" layoutX="156.0" layoutY="99.0" prefHeight="25.0" prefWidth="80.0">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="5.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Всего учтено ">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="hoursCount" disable="true" editable="false" layoutX="81.0" layoutY="128.0" prefHeight="25.0" prefWidth="44.0">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="130.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ч. за ">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="dateCount" disable="true" editable="false" layoutX="162.0" layoutY="128.0" prefHeight="25.0" prefWidth="44.0">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="212.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="дн.">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="editEmployeePane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <TextField fx:id="employeeEditSurname" layoutX="30.0" layoutY="6.0" prefHeight="25.0" prefWidth="190.0" promptText="Фамилия" />
+                                    <TextField fx:id="employeeEditName" layoutX="30.0" layoutY="36.0" prefHeight="25.0" prefWidth="190.0" promptText="Имя" />
+                                    <TextField fx:id="employeeEditPatronymic" layoutX="30.0" layoutY="66.0" prefHeight="25.0" prefWidth="190.0" promptText="Отчество" />
+                                    <TextField fx:id="employeeEditPhone" layoutX="30.0" layoutY="96.0" prefHeight="25.0" prefWidth="190.0" promptText="Номер телефона" />
+                                    <DatePicker fx:id="employeeEditBirth" layoutX="30.0" layoutY="126.0" prefHeight="25.0" prefWidth="190.0" />
+                                    <ChoiceBox fx:id="employeeEditDepartment" layoutX="30.0" layoutY="155.0" prefHeight="25.0" prefWidth="190.0" />
+                                    <Button layoutX="75.0" layoutY="243.0" mnemonicParsing="false" onAction="#editEmployee" text="Редактировать">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="addEmployeePane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <TextField fx:id="surname" layoutX="30.0" layoutY="7.0" prefHeight="25.0" prefWidth="190.0" promptText="Фамилия" />
+                                    <TextField fx:id="name" layoutX="30.0" layoutY="37.0" prefHeight="25.0" prefWidth="190.0" promptText="Имя" />
+                                    <TextField fx:id="patronymic" layoutX="30.0" layoutY="67.0" prefHeight="25.0" prefWidth="190.0" promptText="Отчество" />
+                                    <TextField fx:id="phone" layoutX="30.0" layoutY="97.0" prefHeight="25.0" prefWidth="190.0" promptText="Номер телефона" />
+                                    <DatePicker fx:id="birth" layoutX="30.0" layoutY="127.0" prefHeight="25.0" prefWidth="190.0" />
+                                    <ChoiceBox fx:id="employeeAddDepartment" layoutX="30.0" layoutY="156.0" prefHeight="25.0" prefWidth="190.0" />
+                                    <Button layoutX="90.0" layoutY="243.0" mnemonicParsing="false" onAction="#addEmployee" text="Добавить">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="deleteEmployeePane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <Text layoutX="26.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вы собираетесь удалить выбранного сотруника. Вы уверены?" textAlignment="CENTER" wrappingWidth="200.0">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Button layoutX="40.0" layoutY="243.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Удалить">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="151.0" layoutY="243.0" mnemonicParsing="false" onAction="#showEmployeeInfo" text="Отмена">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="345.0">
+                           <children>
+                              <Label id="messageLabel" fx:id="employeeMessage" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="600.0" text="NULL" textAlignment="JUSTIFY" visible="false">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="dismissEmployeeMessageButton" layoutX="287.0" layoutY="20.0" mnemonicParsing="false" onAction="#dismissEmployeeMessage" text="OK" visible="false">
+                                 <font>
+                                    <Font name="Arial" size="9.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+          <Tab text="Отделы">
+               <content>
+                  <Pane>
+                     <children>
+                        <ToolBar prefHeight="35.0" prefWidth="600.0">
+                           <items>
+                              <Button mnemonicParsing="false" onAction="#showDepartmentInfo" text="Информация об отделе" />
+                              <Button mnemonicParsing="false" onAction="#toggleEditDepartmentDialog" text="Редактировать" />
+                              <Button mnemonicParsing="false" onAction="#toggleAddDepartmentDialog" text="Добавить" />
+                              <Button mnemonicParsing="false" onAction="#toggleDeleteDepartmentDialog" text="Удалить" />
+                           </items>
+                        </ToolBar>
+                        <ListView fx:id="departmentList" layoutX="15.0" layoutY="45.0" prefHeight="280.0" prefWidth="250.0" />
+                        <Pane fx:id="departmentActionPane" layoutX="336.0" layoutY="45.0" prefHeight="280.0" prefWidth="250.0" styleClass="actionPane">
+                           <children>
+                              <Pane fx:id="departmentInfoPane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <Label fx:id="departmentInfo" alignment="TOP_LEFT" prefHeight="280.0" prefWidth="250.0" style="-fx-padding: 5;" text="Номер отдела: #${id}&#10;Название: ${name}&#10;Номер телефона: ${phone}&#10;Кол-во сотрудников в отделе: ${count}&#10;&#10;Статистика:&#10;За неделю: ${stats1} ч.&#10;За месяц: ${stats2} ч.&#10;За год: ${stats3} ч.&#10;Всего: ${stats4} ч." wrapText="true" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="editDepartmentPane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <TextField fx:id="departmentEditName" layoutX="30.0" layoutY="20.0" prefHeight="25.0" prefWidth="190.0" promptText="Название отдела" />
+                                    <TextField fx:id="departmentEditPhone" layoutX="30.0" layoutY="50.0" prefHeight="25.0" prefWidth="190.0" promptText="Номер телефона" />
+                                    <Button layoutX="75.0" layoutY="243.0" mnemonicParsing="false" onAction="#editDepartment" text="Редактировать">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="addDepartmentPane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <TextField fx:id="departmentAddName" layoutX="30.0" layoutY="20.0" prefHeight="25.0" prefWidth="190.0" promptText="Название отдела" />
+                                    <TextField fx:id="departmentAddPhone" layoutX="30.0" layoutY="50.0" prefHeight="25.0" prefWidth="190.0" promptText="Номер телефона" />
+                                    <Button layoutX="90.0" layoutY="243.0" mnemonicParsing="false" onAction="#addDepartment" text="Добавить">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="deleteDepartmentPane" prefHeight="280.0" prefWidth="250.0" visible="false">
+                                 <children>
+                                    <Text layoutX="26.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вы собираетесь удалить выбранный отдел. Вы уверены?" textAlignment="CENTER" wrappingWidth="200.0">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Button layoutX="40.0" layoutY="243.0" mnemonicParsing="false" onAction="#deleteDepartment" text="Удалить">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="151.0" layoutY="243.0" mnemonicParsing="false" onAction="#showDepartmentInfo" text="Отмена">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="345.0">
+                           <children>
+                              <Label id="messageLabel" fx:id="departmentMessage" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="600.0" text="NULL" textAlignment="JUSTIFY" visible="false">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="dismissDepartmentMessageButton" layoutX="287.0" layoutY="20.0" mnemonicParsing="false" onAction="#dismissDepartmentMessage" text="OK" visible="false">
+                                 <font>
+                                    <Font name="Arial" size="9.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="О программе">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="425.0" prefWidth="600.0">
+                           <children>
+                              <TextArea fx:id="changelog" disable="false" editable="false" layoutX="15.0" layoutY="42.0" prefHeight="301.0" prefWidth="279.0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </TextArea>
+                              <Label layoutX="313.0" layoutY="42.0" onMouseClicked="#easterEgg" text="Код писал Zeluboba.&#10;Интерфейс рисовал Zeluboba.&#10;Написать автору — zeluboba@cronfire.ru&#10;И да, в этой программе НЕТ пасхалок." />
+                              <ImageView fx:id="notAnEasterEgg" fitHeight="240.0" fitWidth="319.0" layoutX="293.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@AUFKM.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="15.0" layoutY="17.0" text="История изменений">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

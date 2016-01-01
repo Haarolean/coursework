@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" style="-fx-border-color: grey;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.cronfire.kursach.Auth">
+   <children>
+      <Label layoutX="224.0" layoutY="85.0" text="АВТОРИЗАЦИЯ">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Pane id="loginPane" layoutX="227.0" layoutY="165.0">
+         <children>
+            <TextField fx:id="URIField" promptText="database@host[:port]" text="kursach@cronfire.ru">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </TextField>
+            <TextField id="loginField" fx:id="loginField" layoutY="33.0" promptText="Логин" text="kursach">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="passwordField" layoutY="66.0" promptText="Пароль" text="123123">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="authButton" layoutX="52.0" layoutY="99.0" mnemonicParsing="false" onAction="#auth" text="Вход">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutY="247.0">
+         <children>
+            <Label fx:id="authMessage" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="600.0" text="Awaiting authorization..." textAlignment="JUSTIFY" visible="false">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>

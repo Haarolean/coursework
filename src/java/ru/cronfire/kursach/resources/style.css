@@ -1,0 +1,8 @@
+.root, .mainPane {
+	 -fx-background-image: url("bg.png");
+	 -fx-border-color: grey;
+ }
+ .actionPane {
+	 -fx-border-color:  #039ED322;
+	 -fx-background-color: rgba(255,255,255,1);
+ }
