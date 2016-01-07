@@ -549,7 +549,7 @@ public class Kursach implements Initializable {
 
     @FXML
     protected void dismissDepartmentMessage() {
-        employeeMessage.setVisible(false);
+        departmentMessage.setVisible(false);
         dismissDepartmentMessageButton.setVisible(false);
     }
 
