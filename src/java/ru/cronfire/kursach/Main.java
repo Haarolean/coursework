@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 @SuppressWarnings("WeakerAccess") // fxml stuff
 public class Main extends Application {
 
-    private static final String version = "1.0.0";
+    private static final String version = "1.0.1";
     private static Stage stage;
     private static boolean debug;
     private static boolean checkRegexp = true;
