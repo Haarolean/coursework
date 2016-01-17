@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" style="-fx-border-color: grey;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.cronfire.kursach.Auth">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" style="-fx-border-color: grey;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.cronfire.kursach.Auth">
    <children>
       <Label layoutX="224.0" layoutY="85.0" text="АВТОРИЗАЦИЯ">
          <font>
@@ -13,17 +14,17 @@
       </Label>
       <Pane id="loginPane" layoutX="227.0" layoutY="165.0">
          <children>
-            <TextField fx:id="URIField" promptText="database@host[:port]" text="kursach@cronfire.ru">
+            <TextField fx:id="URIField" promptText="database@host[:port]">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </TextField>
-            <TextField id="loginField" fx:id="loginField" layoutY="33.0" promptText="Логин" text="kursach">
+            <TextField id="loginField" fx:id="loginField" layoutY="33.0" promptText="Логин">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordField" layoutY="66.0" promptText="Пароль" text="123123">
+            <PasswordField fx:id="passwordField" layoutY="66.0" promptText="Пароль">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
@@ -35,7 +36,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutY="247.0">
+      <Pane layoutY="320.0">
          <children>
             <Label fx:id="authMessage" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="600.0" text="Awaiting authorization..." textAlignment="JUSTIFY" visible="false">
                <font>
